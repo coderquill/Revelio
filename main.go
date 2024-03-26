@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/opencareer/interview-excercises/ex_02/lib"
 	"log"
 	"time"
 )
@@ -63,5 +64,14 @@ func main() {
 }
 
 func startProcessing() (processedTasks int, droppedTasks uint64, err error) {
+	// Establish a new connection to the task queue.
+	taskQueueConn, err := lib.NewTaskQueueConn()
+	if err != nil {
+		return 0, 0, err
+	}
+
+	// Listen to the tasks in the task queue.
+	tasks := taskQueueConn.Listen()
+	
 	return processedTasks, droppedTasks, nil
 }
