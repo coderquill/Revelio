@@ -49,13 +49,19 @@ import (
 
 func main() {
 	start := time.Now()
-	err := startProcessing()
-	log.Printf("Total duration: %s", time.Since(start))
+	duration := time.Since(start)
+	processedTasks, droppedTasks, err := startProcessing()
+
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalf("An error encountered: %s\n", err)
 	}
+
+	log.Printf("Tasks processing started at: %s\n", start)
+	log.Printf("Processed Tasks: %d\n", processedTasks)
+	log.Printf("Dropped Tasks: %d\n", droppedTasks)
+	log.Printf("Total duration: %s\n", duration)
 }
 
-func startProcessing() error {
-	panic("TODO")
+func startProcessing() (processedTasks int, droppedTasks uint64, err error) {
+	return processedTasks, droppedTasks, nil
 }
